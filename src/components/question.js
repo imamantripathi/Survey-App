@@ -63,11 +63,12 @@ export default function question(props) {
           <textarea className="form-control" name='q2' id="form4Example3" rows="4"></textarea>
           <label className="form-label" htmlFor="form4Example3">Your feedback</label>
         </div>
-      </form>
-    </div>
-    <div className="card-footer text-end">
+        <div className="card-footer text-end">
       <button type="submit" className="btn btn-primary">Save</button>
     </div>
+      </form>
+    </div>
+    
   </div>
 </div>
     </>

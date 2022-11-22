@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Details from "./details";
 import Question from "./question";
 import { v4 as uuidv4 } from "uuid";
-import Firebase from "firebase";
-import { initializeApp } from 'firebase/app';
+import firebase from "firebase/compat/app";
+// Other libraries might need to also be prefixed with "compat":
+import "firebase/compat/auth";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBaVvuhnGSbjlSsNbiI6ebBPQ268ki1jHs",
@@ -14,8 +15,8 @@ const firebaseConfig = {
   appId: "1:344071933763:web:5adff11a8e8bc86e60a9f6",
   measurementId: "G-7CG8DLWPYL",
 };
-if (Firebase.apps.length < 0) {
-  Firebase.initializeApp(firebaseConfig);
+if (firebase.apps.length < 0) {
+  firebase.initializeApp(firebaseConfig);
 }
 class container extends Component {
   constructor(props) {
@@ -44,6 +45,13 @@ class container extends Component {
     questions.q1 = event.target.q1.value;
     questions.q2 = event.target.q2.value;
     this.setState({ questions });
+    
+    const databases = firebase.database();
+    databases.ref("survey/" + this.state.id).set({
+      name: this.state.name,
+      email: this.state.email,
+      questions: this.state.questions,
+    });
   };
   render() {
     return (
